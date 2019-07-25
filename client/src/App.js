@@ -5,7 +5,7 @@ import ShowCase from "./components/showcase";
 import NewsLetter from "./components/newsletter";
 import Boxes from "./components/boxes";
 import About from "./components/about";
-
+import Authors from "./components/authors";
 
 function App() {
   return <div className="App" data-spy="scroll" data-target="#main-nav">
@@ -14,6 +14,7 @@ function App() {
     <NewsLetter />
     <Boxes />
     <About />
+    <Authors />
 
   </div>;
 }

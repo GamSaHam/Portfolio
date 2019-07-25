@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import Accordion from 'react-bootstrap/Accordion';
+import Card from 'react-bootstrap/Card';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowCircleDown } from '@fortawesome/free-solid-svg-icons'
 
 class About extends Component {
     state = {}
@@ -18,68 +22,71 @@ class About extends Component {
                                     </p>
                             </div>
 
+                            <Accordion defaultActiveKey="0">
 
-                            <div id="accordion">
-                                <div className="card">
-                                    <div className="card-header">
-                                        <h5 className="mb-0">
-                                            <div href="#collapse1" data-toggle="collapse" data-parent="#accordion">
-                                                <i className="fas fa-arrow-circle-down"></i>Get Inspired
-                      </div>
-                                        </h5>
-                                    </div>
-
-                                    <div id="collapse1" className="collapse show">
-                                        <div className="card-body">
+                                <Card>
+                                    <Card.Header>
+                                        <Accordion.Toggle as={Card.Header} eventKey="0" className="bg-transparent border-bottom-0">
+                                            <h5 className="mb-0">
+                                                <FontAwesomeIcon icon={faArrowCircleDown} />Get Inspired
+                                            </h5>
+                                        </Accordion.Toggle>
+                                    </Card.Header>
+                                    <Accordion.Collapse eventKey="0">
+                                        <Card.Body>
                                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate nesciunt velit minima quaerat
                                             dolorem quidem culpa exercitationem eius quod esse, aliquid voluptates fugiat nostrum autem
                                             consequatur labore doloribus omnis vitae asperiores optio error nam blanditiis dignissimos? Cum, nam
                                             odio alias atque blanditiis itaque minus nihil, molestiae nesciunt accusamus temporibus
                                             necessitatibus!
-                    </div>
-                                    </div>
-                                </div>
+                                        </Card.Body>
+                                    </Accordion.Collapse>
 
-                                <div className="card">
-                                    <div className="card-header">
-                                        <h5 className="mb-0">
-                                            <div href="#collapse2" data-toggle="collapse" data-parent="#accordion">
-                                                <i className="fas fa-arrow-circle-down"></i>Gain The Knowledge
-                      </div>
-                                        </h5>
-                                    </div>
+                                </Card>
 
-                                    <div id="collapse2" className="collapse">
-                                        <div className="card-body">
+                                <Card>
+                                    <Card.Header>
+                                        <Accordion.Toggle as={Card.Header} eventKey="1" className="bg-transparent border-bottom-0">
+                                            <h5 className="mb-0">
+                                                <FontAwesomeIcon icon={faArrowCircleDown} />Gain The Knowledge
+                                            </h5>
+                                        </Accordion.Toggle>
+                                    </Card.Header>
+                                    <Accordion.Collapse eventKey="1">
+                                        <Card.Body>
                                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate nesciunt velit minima quaerat
                                             dolorem quidem culpa exercitationem eius quod esse, aliquid voluptates fugiat nostrum autem
                                             consequatur labore doloribus omnis vitae asperiores optio error nam blanditiis dignissimos? Cum, nam
                                             odio alias atque blanditiis itaque minus nihil, molestiae nesciunt accusamus temporibus
                                             necessitatibus!
-                    </div>
-                                    </div>
-                                </div>
+                                        </Card.Body>
+                                    </Accordion.Collapse>
 
-                                <div className="card">
-                                    <div className="card-header">
-                                        <h5 className="mb-0">
-                                            <div href="#collapse3" data-toggle="collapse" data-parent="#accordion">
-                                                <i className="fas fa-arrow-circle-down"></i>Open Your Mind
-                      </div>
-                                        </h5>
-                                    </div>
+                                </Card>
 
-                                    <div id="collapse3" className="collapse">
-                                        <div className="card-body">
+                                <Card>
+                                    <Card.Header>
+                                        <Accordion.Toggle as={Card.Header} eventKey="2" className="bg-transparent border-bottom-0">
+                                            <h5 className="mb-0">
+                                                <FontAwesomeIcon icon={faArrowCircleDown} />Open Your Mind
+                                            </h5>
+                                        </Accordion.Toggle>
+                                    </Card.Header>
+                                    <Accordion.Collapse eventKey="2">
+                                        <Card.Body>
                                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate nesciunt velit minima quaerat
                                             dolorem quidem culpa exercitationem eius quod esse, aliquid voluptates fugiat nostrum autem
                                             consequatur labore doloribus omnis vitae asperiores optio error nam blanditiis dignissimos? Cum, nam
                                             odio alias atque blanditiis itaque minus nihil, molestiae nesciunt accusamus temporibus
                                             necessitatibus!
-                    </div>
-                                    </div>
-                                </div>
-                            </div>
+                                        </Card.Body>
+                                    </Accordion.Collapse>
+
+                                </Card>
+
+
+
+                            </Accordion>
 
                         </div>
                     </div>

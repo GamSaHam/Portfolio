@@ -20,7 +20,7 @@ class ShowCase extends Component {
                 </h1>
                 <p class="lead">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti, veritatis!</p>
                 <a href="#" class="btn btn-outline-secondary btn-lg text-white">
-                  <FontAwesomeIcon icon={faArrowRight} /> Read More
+                  <FontAwesomeIcon icon={faArrowRight} />Read More
                 </a>
               </div>
               <div class="col-lg-6">

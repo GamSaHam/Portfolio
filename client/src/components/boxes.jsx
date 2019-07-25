@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Accordion from 'react-bootstrap/Accordion'
+
 class Boxes extends Component {
     state = {}
     render() {

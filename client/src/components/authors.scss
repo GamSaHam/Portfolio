@@ -1,0 +1,24 @@
+$primary: #3292a6;
+
+#authors {
+    img {
+        margin-top: -50px;
+    }
+
+    
+    .card:hover {
+        background: $primary;
+        color: #fff;
+        
+    }
+
+    .card:hover .icon {
+         color: #fff;
+    }
+
+    .fab {
+        color: #fff;
+    }
+
+
+}

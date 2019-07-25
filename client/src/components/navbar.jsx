@@ -10,7 +10,7 @@ class Navbar extends Component {
         return (
             <nav className="navbar navbar-expand-md navbar-light fixed-top py-4" id="main-nav">
                 <div className="container">
-                    <a href="#home" className="navbar-brand"><img src={logo} width="50" height="50" alt=""></img><h3 className="d-inline align-middle">Mizuxe</h3></a>
+                    <a href="#home" className="navbar-brand"><img src={logo} width="50" height="50" alt=""></img><h3 className="d-inline align-middle"> Mizuxe</h3></a>
 
                     <button className="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span className="navbar-toggler-icon"></span>
