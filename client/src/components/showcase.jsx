@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+
 import React, { Component } from 'react';
 import book from "../img/book.png"
 
@@ -18,8 +21,7 @@ class ShowCase extends Component {
                 </h1>
                 <p class="lead">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti, veritatis!</p>
                 <a href="#" class="btn btn-outline-secondary btn-lg text-white">
-                  <i class="fas fa-arrow-right"></i>Read More1
-
+                  <FontAwesomeIcon icon={faArrowRight} /> Read More
                 </a>
               </div>
               <div class="col-lg-6">
