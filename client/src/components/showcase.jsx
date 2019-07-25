@@ -25,7 +25,6 @@ class ShowCase extends Component {
               </div>
               <div class="col-lg-6">
                 <img src={book} alt="" class="img-fluid d-none d-lg-block"></img>
-
               </div>
             </div>
           </div>

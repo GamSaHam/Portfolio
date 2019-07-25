@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowCircleDown } from '@fortawesome/free-solid-svg-icons'
 
 class About extends Component {
-    state = {}
+
+
     render() {
         return (
             <section id="about" className="py-5 text-center bg-light">
