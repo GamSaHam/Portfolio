@@ -47,14 +47,12 @@ class Header extends Component {
             <i className="fas fa-graduation-cap fa-2x d-block text-white" />
             <span className="d-none d-sm-block text-white">Resume</span>
           </Link>
-          <div
-            className="col port-item p-4 bg-warning"
-            data-toggle="collapse"
-            data-target="#work"
-          >
-            <i className="fas fa-folder-open fa-2x d-block" />
-            <span className="d-none d-sm-block">Work</span>
-          </div>
+
+          <Link to="/work" className="col port-item p-4 bg-warning">
+            <i className="fas fa-folder-open fa-2x d-block text-white" />
+            <span className="d-none d-sm-block text-white">Resume</span>
+          </Link>
+
           <div
             className="col port-item p-4 bg-danger"
             data-toggle="collapse"

@@ -8,8 +8,8 @@ class Home extends Component {
         <div className="card card-body bg-primary text-white py-5">
           <h2>Home</h2>
           <p className="lead">
-            포토폴리오 페이지입니다.새로운 웹 기술에 관심이 많으며 취미는
-            게임제작 있습니다.
+            포토폴리오 소개 페이지입니다. 새로운 웹 기술에 관심이 많으며 취미는
+            게임제작 입니다.
           </p>
         </div>
 
