@@ -5,6 +5,7 @@ import person2 from '../img/person2.jpg';
 
 class Header extends Component {
   state = {};
+
   render() {
     return (
       <header id="main-header">
@@ -53,14 +54,10 @@ class Header extends Component {
             <span className="d-none d-sm-block text-white">Resume</span>
           </Link>
 
-          <div
-            className="col port-item p-4 bg-danger"
-            data-toggle="collapse"
-            data-target="#contact"
-          >
-            <i className="fas fa-envelope fa-2x d-block" />
-            <span className="d-none d-sm-block">Contact</span>
-          </div>
+          <Link to="/contact" className="col port-item p-4 bg-danger">
+            <i className="fas fa-envelope fa-2x d-block text-white" />
+            <span className="d-none d-sm-block text-white">Contact</span>
+          </Link>
         </div>
       </header>
     );

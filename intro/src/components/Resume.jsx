@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 
+import './Resume.scss';
+
 class Resume extends Component {
-  state = {};
+  clickEvent1 = pageIndex => {
+    this.props.onClick(pageIndex);
+  };
+
   render() {
     return (
       <div id="resume" className="row">
         <div className="card card-body bg-success text-white py-5">
           <h2>My Resume</h2>
-          <p class="lead">
+          <p className="lead">
             이력서 관련항목입니다. 출신학교, 교육이수, 경력사항에 관한 내용을
             표기 하고 있습니다.
           </p>
@@ -37,7 +42,10 @@ class Resume extends Component {
 
                 <p className="d-flex justify-content-between p-2 mb-3 border border-light">
                   게임멀티디미어 4.0/4.5
-                  <a href="#" className="btn btn-outline-light text-dark">
+                  <a
+                    onClick={() => this.clickEvent1(0)}
+                    className="btn btn-outline-light text-dark"
+                  >
                     <i className="fas fa-download ml-1 mt-1" />
                   </a>
                 </p>
@@ -62,7 +70,11 @@ class Resume extends Component {
                 <h4 className="card-title">비트교육센터</h4>
                 <p className="d-flex justify-content-between card-text">
                   대전 캠퍼스 Windows.Net 고급과정 수료
-                  <a href="#" className="btn btn-outline-light text-dark">
+                  <a
+                    onClick={() => this.clickEvent1(1)}
+                    className="btn btn-outline-light text-dark"
+                    data-toggle="lightbox"
+                  >
                     <i className="fas fa-download ml-1 mt-1" />
                   </a>
                 </p>
@@ -77,7 +89,10 @@ class Resume extends Component {
                 <h4 className="card-title">아이티윌</h4>
                 <p className="d-flex justify-content-between card-text">
                   전자정부프레임워크 개발자 수료
-                  <a href="#" className="btn btn-outline-light text-dark">
+                  <a
+                    onClick={() => this.clickEvent1(2)}
+                    className="btn btn-outline-light text-dark"
+                  >
                     <i className="fas fa-download ml-1 mt-1" />
                   </a>
                 </p>
