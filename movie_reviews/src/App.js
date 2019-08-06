@@ -44,7 +44,15 @@ class App extends Component {
           </div>
         </div>
         <div id="page-content-wrapper">
-          <div className="container-fluid" />
+          <div className="container-fluid bg-primary ">
+            <div className=" ml-5 mr-5 row bg-secondary">
+              <a href="#" className="btn btn-light  rounded">
+                로그인
+              </a>
+            </div>
+
+            <div className="row">content</div>
+          </div>
         </div>
       </div>
     );
