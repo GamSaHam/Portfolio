@@ -1,7 +1,19 @@
+@import url('https://fonts.googleapis.com/earlyaccess/jejugothic.css');
+@import url('https://fonts.googleapis.com/css?family=Anton');
+
+.font-kor {
+  font-family: 'Jeju Gothic', sans-serif;
+}
+
+.font-logo {
+  font-family: 'Anton', sans-serif;
+}
+
 body {
   overflow-x: hidden;
   background-image: url('./img/prism.png');
   background-repeat: repeat;
+  font-family: 'Anton', sans-serif;
 }
 
 #sidebar-wrapper {
@@ -33,6 +45,7 @@ body {
 
 h1 {
   color: white; /* Fallback: assume this color ON TOP of image */
+  font-family: 'Droid Sans', arial, serif;
   background: url('./img/text-background.jpg') no-repeat;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

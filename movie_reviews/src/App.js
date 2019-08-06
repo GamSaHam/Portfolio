@@ -6,41 +6,45 @@ class App extends Component {
   state = {};
   render() {
     return (
-      <div class="d-flex" id="wrapper">
-        <div class="border-right border-secondary bg-dark" id="sidebar-wrapper">
-          <div class=" sidebar-heading">
-            <h1>Movie Review</h1>{' '}
+      <div className="d-flex" id="wrapper">
+        <div
+          className="border-right border-secondary bg-dark"
+          id="sidebar-wrapper"
+        >
+          <div className=" sidebar-heading">
+            <a href="#" className=" list-group-item list-group-item-action">
+              <h1 className="font-logo">Movie Review</h1>
+            </a>
           </div>
-          <div class="list-group list-group-flush">
+          <div className="list-group list-group-flush">
             <a
               href="#"
-              class="border-top list-group-item list-group-item-action "
+              className="border-top list-group-item list-group-item-action"
             >
-              영화홈
+              <span className="font-kor">영화홈</span>
             </a>
             <a
               href="#"
-              class="border-top list-group-item list-group-item-action "
+              className="border-top list-group-item list-group-item-action "
             >
-              영화 예매
+              <span className="font-kor">영화랭킹</span>
             </a>
             <a
               href="#"
-              class="border-top border-bottom list-group-item list-group-item-action "
+              className="border-top border-bottom list-group-item list-group-item-action "
             >
-              리뷰
+              <span className="font-kor">영화리뷰</span>
             </a>
             <a
               href="#"
-              class="border border-left-0 border-right-0 list-group-item list-group-item-action "
+              className="border border-left-0 border-right-0 list-group-item list-group-item-action "
             >
-              영화 리뷰하기
+              <span className="font-kor">영화예매</span>
             </a>
           </div>
         </div>
-
         <div id="page-content-wrapper">
-          <div class="container-fluid" />
+          <div className="container-fluid" />
         </div>
       </div>
     );
