@@ -8,12 +8,16 @@
 .font-logo {
   font-family: 'Anton', sans-serif;
 }
+.logo:hover {
+  text-decoration: none;
+}
 
 body {
   overflow-x: hidden;
-  background-image: url('./img/prism.png');
+  background-image: url('./img/dust_scratches.png');
   background-repeat: repeat;
   font-family: 'Anton', sans-serif;
+  margin: 0px;
 }
 
 #sidebar-wrapper {
@@ -23,7 +27,7 @@ body {
   -moz-transition: margin 0.25s ease-out;
   -o-transition: margin 0.25s ease-out;
   transition: margin 0.25s ease-out;
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 #sidebar-wrapper .sidebar-heading {
