@@ -4,12 +4,8 @@
 .font-kor {
   font-family: 'Jeju Gothic', sans-serif;
 }
-
-.font-logo {
+.font-eng {
   font-family: 'Anton', sans-serif;
-}
-.logo:hover {
-  text-decoration: none;
 }
 
 body {
@@ -20,52 +16,13 @@ body {
   margin: 0px;
 }
 
-#sidebar-wrapper {
-  min-height: 100vh;
-  margin-left: -15rem;
-  -webkit-transition: margin 0.25s ease-out;
-  -moz-transition: margin 0.25s ease-out;
-  -o-transition: margin 0.25s ease-out;
-  transition: margin 0.25s ease-out;
-  opacity: 0.8;
-}
-
-#sidebar-wrapper .sidebar-heading {
-  padding: 0.875rem 1.25rem;
-  font-size: 1.2rem;
-}
-
-#sidebar-wrapper .list-group {
-  width: 15rem;
-}
-
-#page-content-wrapper {
-  min-width: 100vw;
-}
-
 #wrapper.toggled #sidebar-wrapper {
   margin-left: 0;
 }
 
-h1 {
-  color: white; /* Fallback: assume this color ON TOP of image */
-  font-family: 'Droid Sans', arial, serif;
-  background: url('./img/text-background.jpg') no-repeat;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 @media (min-width: 768px) {
-  #sidebar-wrapper {
-    margin-left: 0;
-  }
-
-  #page-content-wrapper {
-    min-width: 0;
-    width: 100%;
-  }
-
-  #wrapper.toggled #sidebar-wrapper {
-    margin-left: -15rem;
+  .main {
+    margin-left: 220px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
   }
 }
