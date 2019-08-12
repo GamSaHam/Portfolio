@@ -22,16 +22,16 @@ class SideBar extends Component {
             <span className="font-kor">영화홈</span>
           </a>
           <a
-            href="/"
+            href="/reviews"
             className="border-top list-group-item list-group-item-action"
           >
-            <span className="font-kor">영화랭킹</span>
+            <span className="font-kor">영화리뷰</span>
           </a>
           <a
-            href="/reviews"
+            href="/write"
             className="border-top border-bottom list-group-item list-group-item-action "
           >
-            <span className="font-kor">영화리뷰</span>
+            <span className="font-kor">리뷰작성하기</span>
           </a>
           <a
             href="#"

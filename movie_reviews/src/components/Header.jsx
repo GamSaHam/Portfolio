@@ -6,7 +6,12 @@ class Header extends Component {
       <div className="border-bottom" style={{ width: '100%' }}>
         <div className="d-flex justify-content-end ml-5 mr-5">
           <div className="ml-2 p-1">
-            <button type="button" className="btn btn-light">
+            <button
+              type="button"
+              className="btn btn-light"
+              data-toggle="modal"
+              data-target="#exampleModalCenter"
+            >
               Login
             </button>
           </div>

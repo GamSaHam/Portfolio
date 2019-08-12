@@ -3,8 +3,12 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import SideBar from './components/SideBar';
 import Home from './components/Home';
 import Reviews from './components/Reviews';
+import Header from './components/Header';
 
 import './App.css';
+import LoginModal from './components/LoginModal';
+import RegisterModal from './components/RegisterModal';
+import Write from './components/Write';
 
 class App extends Component {
   render() {
@@ -15,9 +19,11 @@ class App extends Component {
 
           <div className="main" style={{ width: '100%' }}>
             <div className="container-fluid bg-light">
+              <Header />
               <Switch>
-                <Route path="/main" component={Home} />{' '}
+                <Route path="/main" component={Home} />
                 <Route path="/reviews" component={Reviews} />
+                <Route path="/write" component={Write} />
                 <Redirect from="/" exact to="/main" />
               </Switch>
             </div>
@@ -34,6 +40,9 @@ class App extends Component {
             </footer>
           </div>
         </div>
+
+        <LoginModal />
+        <RegisterModal />
       </React.Fragment>
     );
   }

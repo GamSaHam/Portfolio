@@ -8,7 +8,6 @@ class Home extends Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
         <Slider />
         <TopMovie />
         <div className="" style={{ height: '400px' }} />
