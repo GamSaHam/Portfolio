@@ -11,7 +11,7 @@ class SideBar extends Component {
       >
         <div className="sidebar-heading">
           <a href="/" className="logo">
-            <h1 className="font-eng img-logo">Movie Review</h1>
+            <h1 className=" img-logo">Movie Review</h1>
           </a>
         </div>
         <div className="list-group list-group-flush">

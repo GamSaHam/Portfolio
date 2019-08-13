@@ -1,18 +1,11 @@
 @import url('https://fonts.googleapis.com/earlyaccess/jejugothic.css');
 @import url('https://fonts.googleapis.com/css?family=Anton');
 
-.font-kor {
-  font-family: 'Jeju Gothic', sans-serif;
-}
-.font-eng {
-  font-family: 'Anton', sans-serif;
-}
-
 body {
   overflow-x: hidden;
   background-image: url('./img/dust_scratches.png');
   background-repeat: repeat;
-  font-family: 'Anton', sans-serif;
+  font-family: 'Anton', sans-serif, 'Jeju Gothic', sans-serif;
   margin: 0px;
 }
 

@@ -69,7 +69,7 @@ class Slider extends Component {
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
-                        <span className="font-eng"> 10/10</span>
+                        <span className=""> 10/10</span>
                       </div>
                     </div>
                   </div>
@@ -86,7 +86,7 @@ class Slider extends Component {
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
-                        <span className="font-eng"> 10/10</span>
+                        <span className=""> 10/10</span>
                       </div>
                     </div>
                   </div>
@@ -103,7 +103,7 @@ class Slider extends Component {
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
-                        <span className="font-eng"> 10/10</span>
+                        <span className=""> 10/10</span>
                       </div>
                     </div>
                   </div>
@@ -120,7 +120,7 @@ class Slider extends Component {
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
-                        <span className="font-eng"> 10/10</span>
+                        <span className=""> 10/10</span>
                       </div>
                     </div>
                   </div>
@@ -137,7 +137,7 @@ class Slider extends Component {
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
-                        <span className="font-eng"> 10/10</span>
+                        <span className=""> 10/10</span>
                       </div>
                     </div>
                   </div>
@@ -157,7 +157,7 @@ class Slider extends Component {
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
-                        <span className="font-eng"> 10/10</span>
+                        <span className=""> 10/10</span>
                       </div>
                     </div>
                   </div>
@@ -174,7 +174,7 @@ class Slider extends Component {
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
-                        <span className="font-eng"> 10/10</span>
+                        <span className=""> 10/10</span>
                       </div>
                     </div>
                   </div>
@@ -191,7 +191,7 @@ class Slider extends Component {
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
-                        <span className="font-eng"> 10/10</span>
+                        <span className=""> 10/10</span>
                       </div>
                     </div>
                   </div>
@@ -208,7 +208,7 @@ class Slider extends Component {
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
-                        <span className="font-eng"> 10/10</span>
+                        <span className=""> 10/10</span>
                       </div>
                     </div>
                   </div>
@@ -225,7 +225,7 @@ class Slider extends Component {
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
                         <i className="fa fa-star" />
-                        <span className="font-eng"> 10/10</span>
+                        <span className=""> 10/10</span>
                       </div>
                     </div>
                   </div>

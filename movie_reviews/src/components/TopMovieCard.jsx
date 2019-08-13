@@ -56,7 +56,7 @@ class TopMovieCard extends Component {
                   <i className="fa fa-star pt-1" />
                   <i className="fa fa-star pt-1" />
                   <i className="fa fa-star pt-1" />
-                  <span className="font-eng ml-2"> 10/10</span>
+                  <span className=" ml-2"> 10/10</span>
                 </div>
                 <a href="#" className="row pt-1">
                   Lorem ipsum, dolor sit amet consectetur adipisicing

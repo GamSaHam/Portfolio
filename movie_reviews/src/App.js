@@ -5,16 +5,17 @@ import Home from './components/Home';
 import Reviews from './components/Reviews';
 import Header from './components/Header';
 
-import './App.css';
 import LoginModal from './components/LoginModal';
 import RegisterModal from './components/RegisterModal';
 import Write from './components/Write';
 
+import './App.scss';
+
 class App extends Component {
   render() {
     return (
-      <React.Fragment>
-        <div className="d-flex  m-0 p-0" id="wrapper">
+      <React.Fragment className="my-font">
+        <div className="d-flex  m-0 p-0 " id="wrapper">
           <SideBar />
 
           <div className="main" style={{ width: '100%' }}>
