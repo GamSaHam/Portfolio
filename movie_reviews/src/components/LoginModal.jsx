@@ -1,7 +1,39 @@
 import React, { Component } from 'react';
 
-class LoginModal extends Component {
-  state = {};
+import Joi from 'joi-browser';
+import Form from './common/form';
+import auth from '../services/authService';
+class LoginModal extends Form {
+  state = {
+    data: { username: '', password: '' },
+    errors: {}
+  };
+
+  schema = {
+    username: Joi.string()
+      .required()
+      .label('Username'),
+    password: Joi.string()
+      .required()
+      .label('Password')
+  };
+
+  doSubmit = async () => {
+    try {
+      const { data } = this.state;
+      await auth.login(data.username, data.password);
+
+      const { state } = this.props.location;
+      window.location = state ? state.from.pathname : '/';
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        const errors = { ...this.state.errors };
+        errors.username = ex.response.data;
+        this.setState({ errors });
+      }
+    }
+  };
+
   render() {
     return (
       <div
@@ -28,66 +60,11 @@ class LoginModal extends Component {
               </button>
             </div>
             <div className="modal-body">
-              <form>
-                <div className="form-group">
-                  <label for="exampleInputEmail1" className="font-kor">
-                    아이디
-                  </label>
-                  <input
-                    type="email"
-                    className="form-control font-kor"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    placeholder="아이디입력"
-                  />
-                  <small id="emailHelp" className="form-text text-muted" />
-                </div>
-                <div className="form-group">
-                  <label for="exampleInputPassword1" className="font-kor">
-                    패스워드
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control font-kor"
-                    id="exampleInputPassword1"
-                    placeholder="패스워드 입력"
-                  />
-                </div>
-                <div className="form-group form-check">
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    id="exampleCheck1"
-                  />
-                  <label
-                    className="form-check-label font-kor"
-                    for="exampleCheck1"
-                  >
-                    아이디 저장하기
-                  </label>
-                  <br />
-                  <a
-                    href="#"
-                    className="font-kor"
-                    data-toggle="modal"
-                    data-target="#exampleModal"
-                  >
-                    회원가입
-                  </a>
-                </div>
+              <form onSubmit={this.handleSubmit}>
+                {this.renderInput('username', 'Username')}
+                {this.renderInput('password', 'Password', 'password')}
+                {this.renderButton('Login')}
               </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                <span className="font-kor">취소</span>
-              </button>
-              <button type="submit" className="btn btn-primary">
-                <span className="font-kor">로그인</span>
-              </button>
             </div>
           </div>
         </div>
