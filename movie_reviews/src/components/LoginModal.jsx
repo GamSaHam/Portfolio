@@ -3,10 +3,13 @@ import React, { Component } from 'react';
 import Joi from 'joi-browser';
 import Form from './common/form';
 import auth from '../services/authService';
+import Modal from 'react-bootstrap/Modal';
+
 class LoginModal extends Form {
   state = {
     data: { username: '', password: '' },
-    errors: {}
+    errors: {},
+    show: false
   };
 
   schema = {
@@ -21,10 +24,14 @@ class LoginModal extends Form {
   doSubmit = async () => {
     try {
       const { data } = this.state;
+
       await auth.login(data.username, data.password);
 
-      const { state } = this.props.location;
-      window.location = state ? state.from.pathname : '/';
+      this.props.onShowModal(false);
+      this.props.onLogin();
+      // const { state } = this.props.location;
+      // console.log('modal close1');
+      // window.location = state ? state.from.pathname : '/';
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
@@ -35,39 +42,27 @@ class LoginModal extends Form {
   };
 
   render() {
+    const { isShow, onShowModal } = this.props;
+
     return (
-      <div
-        className="modal fade"
-        id="exampleModalCenter"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalCenterTitle">
-                로그인
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <form onSubmit={this.handleSubmit}>
-                {this.renderInput('username', 'Username')}
-                {this.renderInput('password', 'Password', 'password')}
-                {this.renderButton('Login')}
-              </form>
-            </div>
-          </div>
-        </div>
+      <div>
+        <Modal
+          show={isShow}
+          onHide={() => {
+            onShowModal(false);
+          }}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>로그인</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form onSubmit={this.handleSubmit}>
+              {this.renderInput('username', 'Username')}
+              {this.renderInput('password', 'Password', 'password')}
+              {this.renderButton('Login')}
+            </form>
+          </Modal.Body>
+        </Modal>
       </div>
     );
   }

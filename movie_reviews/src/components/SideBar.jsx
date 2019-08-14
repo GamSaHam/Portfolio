@@ -3,7 +3,10 @@ import './SideBar.scss';
 
 class SideBar extends Component {
   state = {};
+
   render() {
+    const { onCheckLogin } = this.props;
+
     return (
       <div
         className="border-right border-secondary bg-light"
@@ -28,8 +31,9 @@ class SideBar extends Component {
             <span className="font-kor">영화리뷰</span>
           </a>
           <a
-            href="/write"
+            href="#"
             className="border-top border-bottom list-group-item list-group-item-action "
+            onClick={() => onCheckLogin('/write')}
           >
             <span className="font-kor">리뷰작성하기</span>
           </a>

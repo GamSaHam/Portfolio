@@ -1,20 +1,37 @@
 import React, { Component } from 'react';
+import auth from '../services/authService';
+import _ from 'lodash';
+
 class Header extends Component {
   state = {};
+
   render() {
+    const { onShowModal, onLogout, user } = this.props;
+
     return (
       <div className="border-bottom" style={{ width: '100%' }}>
         <div className="d-flex justify-content-end ml-5 mr-5">
-          <div className="ml-2 p-1">
-            <button
-              type="button"
-              className="btn btn-light"
-              data-toggle="modal"
-              data-target="#exampleModalCenter"
-            >
-              Login
-            </button>
-          </div>
+          {_.isEmpty(user) ? (
+            <div className="ml-2 p-1">
+              <button
+                type="button"
+                className="btn btn-light"
+                onClick={() => onShowModal(true)}
+              >
+                Login
+              </button>
+            </div>
+          ) : (
+            <div className="mt-1">
+              <a href="#">{user.name + '님'}</a>
+              <button
+                className="ml-2 btn btn-primary"
+                onClick={() => onLogout()}
+              >
+                로그아웃
+              </button>
+            </div>
+          )}
           <div className="ml-2 p-1">
             <a href="#" className="btn">
               <i className="fas fa-align-justify" />
