@@ -33,7 +33,7 @@ class SideBar extends Component {
           <a
             href="#"
             className="border-top border-bottom list-group-item list-group-item-action "
-            onClick={() => onCheckLogin('/write')}
+            onClick={() => onCheckLogin('/write/new')}
           >
             <span className="font-kor">리뷰작성하기</span>
           </a>

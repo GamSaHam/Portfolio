@@ -6,38 +6,51 @@ import SideBar from './components/SideBar';
 import Home from './components/Home';
 import Reviews from './components/Reviews';
 import Header from './components/Header';
-
-import LoginModal from './components/LoginModal';
-import RegisterModal from './components/RegisterModal';
+import LoginModal from './components/modal/LoginModal';
+import RegisterModal from './components/modal/RegisterModal';
 import Write from './components/Write';
-
 import auth from './services/authService';
 import ConfirmModal from './components/ConfirmModal';
+import PopupModal from './components/modal/PopupModal';
 
 import './App.scss';
-import PopupModal from './components/PopupModal';
-
 class App extends Component {
   componentDidMount() {
     this.setState({ user: auth.getCurrentUser() });
   }
 
   state = {
-    isShow: false,
+    isShowLoginModal: false,
+    isShowConfirmModal: false,
+    isShowRegisterModal: false,
+    isShowPopup: false,
     user: {},
-    popupShow: false,
-    confirmModalShow: false,
     confirmModalCallback: {},
     popupMessage: '',
-    location: ''
+    location: '',
+    popupCallback: function() {}
   };
 
-  showLoginModal = isShow => {
-    this.setState({ isShow });
+  showLoginModal = isShowLoginModal => {
+    this.setState({ isShowLoginModal });
+  };
+
+  showRegisterModal = isShowRegisterModal => {
+    this.setState({ isShowRegisterModal });
+  };
+
+  showPopup = message => {
+    this.setState({ popupMessage: message });
+    this.setState({ isShowPopup: true });
+    this.setState({ popupCallback: this.popupClose });
+  };
+
+  popupClose = () => {
+    this.setState({ isShowPopup: false });
   };
 
   handleLogout = () => {
-    this.setState({ confirmModalShow: true });
+    this.setState({ isShowConfirmModal: true });
     this.setState({ confirmModalCallback: this.logoutCallback });
   };
 
@@ -51,11 +64,12 @@ class App extends Component {
   };
 
   logoutCallback = ret => {
-    this.setState({ confirmModalShow: false });
+    this.setState({ isShowConfirmModal: false });
 
-    if (ret == 1) {
+    if (ret === 1) {
       auth.logout();
       this.setState({ user: {} });
+      window.location.href = '/';
     }
   };
 
@@ -65,9 +79,21 @@ class App extends Component {
       window.location.href = path;
     } else {
       this.setState({ popupMessage: '로그인이 필요한 서비스입니다.' });
-      this.setState({ popupShow: true });
+      this.setState({ isShowPopup: true });
+      this.setState({
+        popupCallback: this.callbackShowLoginModal
+      });
 
-      this.setState({ location: '/write' });
+      this.setState({ location: path });
+    }
+  };
+
+  callbackShowLoginModal = ret => {
+    if (ret === 1) {
+      this.setState({ isShowPopup: false });
+      this.setState({ isShowLoginModal: true });
+    } else {
+      this.setState({ isShowPopup: false });
     }
   };
 
@@ -87,7 +113,13 @@ class App extends Component {
               <Switch>
                 <Route path="/main" component={Home} />
                 <Route path="/reviews" component={Reviews} />
-                <Route path="/write" component={Write} />
+                <Route
+                  path="/write/:id"
+                  render={props => (
+                    <Write {...props} showPopup={this.showPopup} />
+                  )}
+                />
+
                 <Redirect from="/" exact to="/main" />
               </Switch>
             </div>
@@ -106,27 +138,24 @@ class App extends Component {
         </div>
 
         <PopupModal
-          isShow={this.state.popupShow}
+          isShow={this.state.isShowPopup}
           msg={this.state.popupMessage}
-          handleClose={ret => {
-            if (ret == 1) {
-              this.setState({ popupShow: false });
-              this.setState({ isShow: true });
-            } else {
-              this.setState({ popupShow: false });
-            }
-          }}
+          handleClose={this.state.popupCallback}
         />
         <ConfirmModal
-          isShow={this.state.confirmModalShow}
+          isShow={this.state.isShowConfirmModal}
           onResponse={this.state.confirmModalCallback}
         />
         <LoginModal
           onShowModal={this.showLoginModal}
-          isShow={this.state.isShow}
+          onShowRegisterModal={this.showRegisterModal}
+          isShow={this.state.isShowLoginModal}
           onLogin={this.handleLogin}
         />
-        <RegisterModal />
+        <RegisterModal
+          isShow={this.state.isShowRegisterModal}
+          onShowModal={this.showRegisterModal}
+        />
       </div>
     );
   }

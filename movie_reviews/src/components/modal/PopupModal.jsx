@@ -14,7 +14,12 @@ class PopupModal extends Component {
           handleClose(0);
         }}
       >
-        <Modal.Body>{msg}</Modal.Body>
+        <Modal.Body
+          className="d-flex justify-content-center"
+          style={{ height: '110px' }}
+        >
+          <span className="align-self-center">{msg}</span>
+        </Modal.Body>
         <Modal.Footer>
           <button
             className="btn btn-primary"

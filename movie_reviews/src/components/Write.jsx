@@ -1,63 +1,102 @@
 import React, { Component } from 'react';
-import RichEditor from './common/RichEditor';
+import Joi from 'joi-browser';
+import { getMovie, saveMovie } from '../services/movieService';
+import { getGenres } from '../services/genreService';
 
-class Write extends Component {
-  state = {};
+import Form from '../components/common/form';
+import RichEditor from './common/RichEditor';
+import { tsConstructSignatureDeclaration } from '@babel/types';
+
+class Write extends Form {
+  state = {
+    data: {
+      title: '',
+      genreId: '',
+      numberInStock: '',
+      dailyRentalRate: ''
+    },
+    genres: [],
+    errors: {}
+  };
+
+  schema = {
+    _id: Joi.string(),
+    title: Joi.string()
+      .required()
+      .min(5)
+      .max(50)
+      .label('Title'),
+    genreId: Joi.string()
+      .required()
+      .label('Genre'),
+    numberInStock: Joi.number()
+      .required()
+      .min(0)
+      .max(100)
+      .label('Number in Stock'),
+    dailyRentalRate: Joi.number()
+      .required()
+      .min(0)
+      .max(10)
+      .label('Daily Rental Rate')
+  };
+
+  async populateGenres() {
+    const { data: genres } = await getGenres();
+    this.setState({ genres });
+  }
+
+  async populateMovie() {
+    try {
+      const movieId = this.props.match.params.id;
+      console.log('test' + movieId);
+      if (movieId === 'new') return;
+
+      const { data: movie } = await getMovie(movieId);
+      this.setState({ data: this.mapToViewModel(movie) });
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404)
+        this.props.history.replace('/not-found');
+    }
+  }
+
+  async componentDidMount() {
+    await this.populateGenres();
+    await this.populateMovie();
+  }
+
+  mapToViewModel(movie) {
+    return {
+      _id: movie._id,
+      title: movie.title,
+      genreId: movie.genre._id,
+      numberInStock: movie.numberInStock,
+      dailyRentalRate: movie.dailyRentalRate
+    };
+  }
+
+  doSubmit = async () => {
+    await saveMovie(this.state.data);
+
+    this.props.showPopup('저장이 완료 되었습니다.');
+    //this.props.history.push('/movies');
+  };
+
   render() {
     return (
-      <div className="container pt-5">
-        <h1 className="">리뷰 작성하기</h1>
-        <hr />
-        <form>
-          <div className="form-group">
-            <label for="exampleInputEmail1" className="">
-              영화선택
-            </label>
-            <input className="form-control RichEditor-root" />
-          </div>
-
-          <div className="form-group">
-            <label for="exampleInputEmail1" className="">
-              타이틀
-            </label>
-            <input className="form-control " />
-          </div>
-
-          <div className="form-group">
-            <label for="exampleInputEmail1" className="">
-              해시태그
-            </label>
-            <input className="form-control " />
-          </div>
-
-          <div className="form-group">
-            <label for="exampleInputEmail1" className="">
-              평점
-            </label>
-            <input className="form-control " />
-          </div>
-
-          <RichEditor />
-          <br />
-          <div className="d-flex justify-content-end">
-            <button
-              type="submit"
-              className="d-flex justify-content-center btn btn-primary "
-            >
-              저장
-            </button>
-
-            <button
-              type="submit"
-              className="ml-1 d-flex justify-content-center btn btn-primary"
-            >
-              취소
-            </button>
-          </div>
-        </form>
-
+      <React.Fragment>
+        <div className="container pt-5">
+          <h1 className="">리뷰작성하기</h1>
+          <form onSubmit={this.handleSubmit}>
+            {this.renderInput('title', 'Title')}
+            {this.renderSelect('genreId', 'Genre', this.state.genres)}
+            {this.renderInput('numberInStock', 'Number in Stock', 'number')}
+            {this.renderInput('dailyRentalRate', 'Rate')}
+            {this.renderButton('Save')}
+          </form>
+        </div>
         <div className="" style={{ height: '400px' }} />
-      </div>
+      </React.Fragment>
     );
   }
 }

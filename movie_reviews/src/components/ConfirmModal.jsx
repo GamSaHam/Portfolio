@@ -7,7 +7,12 @@ class ConfirmModal extends Component {
 
     return (
       <Modal show={isShow} onHide={() => onResponse(0)}>
-        <Modal.Body>로그아웃을 하시겠습니까?</Modal.Body>
+        <Modal.Body
+          className="d-flex justify-content-center"
+          style={{ height: '150px' }}
+        >
+          <span className="align-self-center">로그아웃을 하시겠습니까?</span>
+        </Modal.Body>
         <Modal.Footer>
           <button
             className="btn btn-secondary"

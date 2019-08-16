@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 import Joi from 'joi-browser';
-import Form from './common/form';
-import auth from '../services/authService';
+import Form from '../common/form';
+import auth from '../../services/authService';
 import Modal from 'react-bootstrap/Modal';
 
 class LoginModal extends Form {
@@ -42,7 +42,7 @@ class LoginModal extends Form {
   };
 
   render() {
-    const { isShow, onShowModal } = this.props;
+    const { isShow, onShowModal, onShowRegisterModal } = this.props;
 
     return (
       <div>
@@ -55,13 +55,34 @@ class LoginModal extends Form {
           <Modal.Header closeButton>
             <Modal.Title>로그인</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <form onSubmit={this.handleSubmit}>
-              {this.renderInput('username', 'Username')}
-              {this.renderInput('password', 'Password', 'password')}
-              {this.renderButton('Login')}
-            </form>
-          </Modal.Body>
+          <form onSubmit={this.handleSubmit}>
+            <Modal.Body>
+              {this.renderInput('username', '아이디')}
+              {this.renderInput('password', '비밀번호', 'password')}
+              <p>
+                회원이 아니세요?{' '}
+                <button
+                  className="btn btn-light"
+                  onClick={() => {
+                    onShowModal(false);
+                    onShowRegisterModal(true);
+                  }}
+                >
+                  회원가입
+                </button>
+              </p>
+            </Modal.Body>
+
+            <Modal.Footer>
+              {this.renderButton('로그인')}
+              <button
+                className="btn btn-light"
+                onClick={() => onShowModal(false)}
+              >
+                취소
+              </button>
+            </Modal.Footer>
+          </form>
         </Modal>
       </div>
     );
