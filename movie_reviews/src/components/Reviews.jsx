@@ -4,7 +4,7 @@ import ReviewsTable from './ReviewsTable';
 
 class Reviews extends Component {
   state = {
-    movies: [],
+    reiews: [],
     genres: [],
     currentPage: 1,
     pageSize: 4,
@@ -12,18 +12,18 @@ class Reviews extends Component {
     selectedGenre: null,
     sortColumn: { path: 'title', order: 'asc' }
   };
-  handleDelete = async movie => {
-    const originalMovies = this.state.movies;
-    const movies = originalMovies.filter(m => m._id !== movie._id);
-    this.setState({ movies });
+  handleDelete = async review => {
+    const originalReviews = this.state.reviews;
+    const reviews = originalReviews.filter(m => m._id !== review._id);
+    this.setState({ reviews });
   };
 
-  handleLike = movie => {
-    const movies = [...this.state.movies];
-    const index = movies.indexOf(movie);
-    movies[index] = { ...movies[index] };
-    movies[index].liked = !movies[index].liked;
-    this.setState({ movies });
+  handleLike = review => {
+    const reviews = [...this.state.reviews];
+    const index = reviews.indexOf(review);
+    reviews[index] = { ...reviews[index] };
+    reviews[index].liked = !reviews[index].liked;
+    this.setState({ reviews });
   };
 
   handleSort = sortColumn => {
@@ -36,7 +36,7 @@ class Reviews extends Component {
       currentPage,
       sortColumn,
       searchQuery,
-      movies
+      reviews
     } = this.state;
 
     return (

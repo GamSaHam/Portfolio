@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Joi from 'joi-browser';
-import { getMovie, saveMovie } from '../services/movieService';
-import { getGenres } from '../services/genreService';
-
+import { getReview, saveReview } from '../services/reviewService';
+import { getMovies } from '../services/movieService';
 import Form from '../components/common/form';
 import RichEditor from './common/RichEditor';
 import { tsConstructSignatureDeclaration } from '@babel/types';
@@ -10,50 +9,44 @@ import { tsConstructSignatureDeclaration } from '@babel/types';
 class Write extends Form {
   state = {
     data: {
+      movieId: '',
       title: '',
-      genreId: '',
-      numberInStock: '',
-      dailyRentalRate: ''
+      rating: ''
     },
-    genres: [],
+    movies: [],
     errors: {}
   };
 
   schema = {
     _id: Joi.string(),
+    movieId: Joi.string()
+      .required()
+      .label('Movie'),
     title: Joi.string()
       .required()
       .min(5)
       .max(50)
       .label('Title'),
-    genreId: Joi.string()
-      .required()
-      .label('Genre'),
-    numberInStock: Joi.number()
+    rating: Joi.number()
       .required()
       .min(0)
-      .max(100)
-      .label('Number in Stock'),
-    dailyRentalRate: Joi.number()
-      .required()
-      .min(0)
-      .max(10)
-      .label('Daily Rental Rate')
+      .max(5)
+      .label('rate')
   };
 
-  async populateGenres() {
-    const { data: genres } = await getGenres();
-    this.setState({ genres });
+  async populateMovies() {
+    const { data: movies } = await getMovies();
+    this.setState({ movies });
   }
 
-  async populateMovie() {
+  async populateReview() {
     try {
-      const movieId = this.props.match.params.id;
-      console.log('test' + movieId);
-      if (movieId === 'new') return;
+      const reviewId = this.props.match.params.id;
 
-      const { data: movie } = await getMovie(movieId);
-      this.setState({ data: this.mapToViewModel(movie) });
+      if (reviewId === 'new') return;
+
+      const { data: review } = await getReview(reviewId);
+      this.setState({ data: this.mapToViewModel(review) });
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
         this.props.history.replace('/not-found');
@@ -61,25 +54,23 @@ class Write extends Form {
   }
 
   async componentDidMount() {
-    await this.populateGenres();
-    await this.populateMovie();
+    await this.populateMovies();
+    await this.populateReview();
   }
 
-  mapToViewModel(movie) {
+  mapToViewModel(review) {
     return {
-      _id: movie._id,
-      title: movie.title,
-      genreId: movie.genre._id,
-      numberInStock: movie.numberInStock,
-      dailyRentalRate: movie.dailyRentalRate
+      _id: review._id,
+      movieId: review.movie._id,
+      title: review.title,
+      rating: review.rating
     };
   }
 
   doSubmit = async () => {
-    await saveMovie(this.state.data);
+    await saveReview(this.state.data);
 
     this.props.showPopup('저장이 완료 되었습니다.');
-    //this.props.history.push('/movies');
   };
 
   render() {
@@ -88,10 +79,9 @@ class Write extends Form {
         <div className="container pt-5">
           <h1 className="">리뷰작성하기</h1>
           <form onSubmit={this.handleSubmit}>
+            {this.renderSelect('movieId', 'Movie', this.state.movies)}
             {this.renderInput('title', 'Title')}
-            {this.renderSelect('genreId', 'Genre', this.state.genres)}
-            {this.renderInput('numberInStock', 'Number in Stock', 'number')}
-            {this.renderInput('dailyRentalRate', 'Rate')}
+            {this.renderInput('rating', 'Rating')}
             {this.renderButton('Save')}
           </form>
         </div>

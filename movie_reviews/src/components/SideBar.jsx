@@ -41,7 +41,7 @@ class SideBar extends Component {
             href="#"
             className="border border-left-0 border-right-0 list-group-item list-group-item-action "
           >
-            <span className="font-kor">영화예매</span>
+            <span className="font-kor">영화미리보기</span>
           </a>
         </div>
       </div>
