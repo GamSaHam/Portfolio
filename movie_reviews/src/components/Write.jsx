@@ -1,21 +1,38 @@
 import React, { Component } from 'react';
 import Joi from 'joi-browser';
+import {
+  Editor,
+  EditorState,
+  RichUtils,
+  getDefaultKeyBinding,
+  convertFromRaw,
+  convertToRaw
+} from 'draft-js';
 import { getReview, saveReview } from '../services/reviewService';
 import { getMovies } from '../services/movieService';
+import auth from '../services/authService';
 import Form from '../components/common/form';
 import RichEditor from './common/RichEditor';
-import { tsConstructSignatureDeclaration } from '@babel/types';
 
 class Write extends Form {
   state = {
     data: {
       movieId: '',
       title: '',
-      rating: ''
+      rating: '',
+      content: {},
+      userId: '',
+      userName: ''
     },
+    editorState: '',
     movies: [],
     errors: {}
   };
+
+  constructor(props) {
+    super(props);
+    this.state.editorState = EditorState.createEmpty();
+  }
 
   schema = {
     _id: Joi.string(),
@@ -28,10 +45,13 @@ class Write extends Form {
       .max(50)
       .label('Title'),
     rating: Joi.number()
-      .required()
       .min(0)
       .max(5)
-      .label('rate')
+      .required()
+      .label('Rating'),
+    content: Joi.object(),
+    userId: Joi.string(),
+    userName: Joi.string()
   };
 
   async populateMovies() {
@@ -56,6 +76,9 @@ class Write extends Form {
   async componentDidMount() {
     await this.populateMovies();
     await this.populateReview();
+
+    this.state.data.userId = auth.getCurrentUser()._id;
+    this.state.data.userName = auth.getCurrentUser().name;
   }
 
   mapToViewModel(review) {
@@ -68,9 +91,14 @@ class Write extends Form {
   }
 
   doSubmit = async () => {
+    const contentState = this.state.editorState.getCurrentContent();
+    this.state.data.content = JSON.stringify(convertToRaw(contentState));
     await saveReview(this.state.data);
 
     this.props.showPopup('저장이 완료 되었습니다.');
+  };
+  handleOnChange = editorState => {
+    this.setState({ editorState });
   };
 
   render() {
@@ -82,6 +110,11 @@ class Write extends Form {
             {this.renderSelect('movieId', 'Movie', this.state.movies)}
             {this.renderInput('title', 'Title')}
             {this.renderInput('rating', 'Rating')}
+
+            <RichEditor
+              editorState={this.state.editorState}
+              handleOnChange={this.handleOnChange}
+            />
             {this.renderButton('Save')}
           </form>
         </div>

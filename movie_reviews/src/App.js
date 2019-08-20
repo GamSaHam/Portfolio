@@ -5,6 +5,7 @@ import _ from 'lodash';
 import SideBar from './components/SideBar';
 import Home from './components/Home';
 import Reviews from './components/Reviews';
+import Review from './components/Review';
 import Header from './components/Header';
 import LoginModal from './components/modal/LoginModal';
 import RegisterModal from './components/modal/RegisterModal';
@@ -113,6 +114,7 @@ class App extends Component {
               <Switch>
                 <Route path="/main" component={Home} />
                 <Route path="/reviews" component={Reviews} />
+                <Route path="/review/:id" component={Review} />
                 <Route
                   path="/write/:id"
                   render={props => (

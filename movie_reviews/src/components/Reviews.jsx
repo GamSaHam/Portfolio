@@ -84,7 +84,9 @@ class Reviews extends Component {
             <h4 className="font-kor border-bottom">베스트글</h4>
           </div>
           <div className="pt-3 border-bottom">
-            <ReviewsTable />
+            {
+              //<ReviewsTable />
+            }
           </div>
         </div>
         <div className="" style={{ height: '400px' }} />

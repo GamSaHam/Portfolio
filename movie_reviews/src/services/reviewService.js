@@ -10,6 +10,10 @@ export function getReviews() {
   return http.get(apiEndpoint);
 }
 
+export function getRecentReviews() {
+  return http.get(apiEndpoint + '/recent');
+}
+
 export function getReview(reviewId) {
   return http.get(reviewUrl(reviewId));
 }

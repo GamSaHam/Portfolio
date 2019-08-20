@@ -1,47 +1,28 @@
 import React, { Component } from 'react';
-
+import { getRecentReviews } from '../services/reviewService';
+import moment from 'moment';
 class ReviewsTable extends Component {
   state = {
-    column: ['번호', '제목', '작성자', '등록일'],
-    content: [
-      [
-        1,
-        'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, accusantium omnis aut amet quia laudantium.',
-        '유저1',
-        '2019-08-09:12:56'
-      ],
-      [
-        2,
-        'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, accusantium omnis aut amet quia laudantium.',
-        '유저2',
-        '2019-08-09:12:56'
-      ],
-      [
-        3,
-        'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, accusantium omnis aut amet quia laudantium.',
-        '유저2',
-        '2019-08-09:12:56'
-      ],
-      [
-        4,
-        'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, accusantium omnis aut amet quia laudantium.',
-        '유저2',
-        '2019-08-09:12:56'
-      ],
-      [
-        5,
-        'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, accusantium omnis aut amet quia laudantium.',
-        '유저2',
-        '2019-08-09:12:56'
-      ],
-      [
-        6,
-        'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, accusantium omnis aut amet quia laudantium.',
-        '유저2',
-        '2019-08-09:12:56'
-      ]
-    ]
+    column: ['번호', '영화', '제목', '작성자', '등록일'],
+    reviews: []
   };
+
+  async recentReview() {
+    try {
+      const { data: reviews } = await getRecentReviews();
+
+      this.setState({ reviews });
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404) {
+        console.log('error handling');
+      }
+      //this.props.history.replace('/not-found');
+    }
+  }
+
+  async componentDidMount() {
+    await this.recentReview();
+  }
 
   render() {
     return (
@@ -56,12 +37,29 @@ class ReviewsTable extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.content.map(obj => (
-            <tr>
-              {obj.map(row => (
-                <td>{row}</td>
-              ))}
-            </tr>
+          {this.state.reviews.map((currentElement, index) => (
+            <React.Fragment>
+              <tr>
+                <td className="text-center" style={{ width: '10%' }}>
+                  {index + 1}
+                </td>
+
+                <td className="text-center" style={{ width: '10%' }}>
+                  {currentElement.movie.name}
+                </td>
+                <td className="text-center" style={{ width: '60%' }}>
+                  <a href={'/review/' + currentElement._id}>
+                    {currentElement.title}
+                  </a>
+                </td>
+                <td className="text-center" style={{ width: '10%' }}>
+                  {currentElement.userName}
+                </td>
+                <td className="text-center" style={{ width: '10%' }}>
+                  {moment(currentElement.publishDate).format('YYYY-mm-D')}
+                </td>
+              </tr>
+            </React.Fragment>
           ))}
         </tbody>
       </table>
