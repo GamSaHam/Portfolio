@@ -29,9 +29,6 @@ class LoginModal extends Form {
 
       this.props.onShowModal(false);
       this.props.onLogin();
-      // const { state } = this.props.location;
-      // console.log('modal close1');
-      // window.location = state ? state.from.pathname : '/';
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };

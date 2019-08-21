@@ -14,6 +14,10 @@ export function getRecentReviews() {
   return http.get(apiEndpoint + '/recent');
 }
 
+export function getBestReviews() {
+  return http.get(apiEndpoint + '/best');
+}
+
 export function getReview(reviewId) {
   return http.get(reviewUrl(reviewId));
 }
@@ -29,5 +33,6 @@ export function saveReview(review) {
 }
 
 export function deleteReview(reviewId) {
+  console.log(reviewUrl(reviewId));
   return http.delete(reviewUrl(reviewId));
 }

@@ -11,10 +11,13 @@ import LoginModal from './components/modal/LoginModal';
 import RegisterModal from './components/modal/RegisterModal';
 import Write from './components/Write';
 import auth from './services/authService';
-import ConfirmModal from './components/ConfirmModal';
+import ConfirmModal from './components/modal/ConfirmModal';
 import PopupModal from './components/modal/PopupModal';
 
+import history from './history';
+
 import './App.scss';
+
 class App extends Component {
   componentDidMount() {
     this.setState({ user: auth.getCurrentUser() });
@@ -28,6 +31,7 @@ class App extends Component {
     user: {},
     confirmModalCallback: {},
     popupMessage: '',
+    confirmPopupMessage: '',
     location: '',
     popupCallback: function() {}
   };
@@ -52,6 +56,7 @@ class App extends Component {
 
   handleLogout = () => {
     this.setState({ isShowConfirmModal: true });
+    this.setState({ confirmPopupMessage: '로그아웃 하시겠습니까?' });
     this.setState({ confirmModalCallback: this.logoutCallback });
   };
 
@@ -59,7 +64,7 @@ class App extends Component {
     this.setState({ user: auth.getCurrentUser() });
 
     if (this.state.location !== '') {
-      window.location.href = this.state.location;
+      history.push(this.state.location);
       this.setState({ location: '' });
     }
   };
@@ -69,15 +74,14 @@ class App extends Component {
 
     if (ret === 1) {
       auth.logout();
+      history.push('/');
       this.setState({ user: {} });
-      window.location.href = '/';
     }
   };
 
   handleLoginCheck = path => {
     if (!_.isEmpty(this.state.user)) {
-      console.log(path);
-      window.location.href = path;
+      history.push(path);
     } else {
       this.setState({ popupMessage: '로그인이 필요한 서비스입니다.' });
       this.setState({ isShowPopup: true });
@@ -112,7 +116,7 @@ class App extends Component {
                 onLogout={this.handleLogout}
               />
               <Switch>
-                <Route path="/main" component={Home} />
+                <Route path="/main" render={props => <Home {...props} />} />
                 <Route path="/reviews" component={Reviews} />
                 <Route path="/review/:id" component={Review} />
                 <Route
@@ -146,6 +150,7 @@ class App extends Component {
         />
         <ConfirmModal
           isShow={this.state.isShowConfirmModal}
+          message={this.state.confirmPopupMessage}
           onResponse={this.state.confirmModalCallback}
         />
         <LoginModal

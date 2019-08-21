@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import Joi from 'joi-browser';
-import {
-  Editor,
-  EditorState,
-  RichUtils,
-  getDefaultKeyBinding,
-  convertFromRaw,
-  convertToRaw
-} from 'draft-js';
+import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import { getReview, saveReview } from '../services/reviewService';
 import { getMovies } from '../services/movieService';
 import auth from '../services/authService';
 import Form from '../components/common/form';
 import RichEditor from './common/RichEditor';
+import PopupModal from './modal/PopupModal';
+
+import history from 'history';
 
 class Write extends Form {
   state = {
@@ -22,16 +18,21 @@ class Write extends Form {
       rating: '',
       content: {},
       userId: '',
-      userName: ''
+      userName: '',
+      views: ''
     },
     editorState: '',
     movies: [],
-    errors: {}
+    errors: {},
+    isShowPopup: false,
+    popupMessage: '',
+    id: ''
   };
 
   constructor(props) {
     super(props);
     this.state.editorState = EditorState.createEmpty();
+    this.state.data.views = 0;
   }
 
   schema = {
@@ -51,7 +52,8 @@ class Write extends Form {
       .label('Rating'),
     content: Joi.object(),
     userId: Joi.string(),
-    userName: Joi.string()
+    userName: Joi.string(),
+    views: Joi.number()
   };
 
   async populateMovies() {
@@ -66,6 +68,14 @@ class Write extends Form {
       if (reviewId === 'new') return;
 
       const { data: review } = await getReview(reviewId);
+
+      const content = review.content;
+      if (content) {
+        this.state.editorState = EditorState.createWithContent(
+          convertFromRaw(JSON.parse(content))
+        );
+      }
+
       this.setState({ data: this.mapToViewModel(review) });
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
@@ -86,19 +96,37 @@ class Write extends Form {
       _id: review._id,
       movieId: review.movie._id,
       title: review.title,
-      rating: review.rating
+      rating: review.rating,
+      content: review.content,
+      userId: review.userId,
+      userName: review.userName,
+      views: review.views
     };
   }
 
   doSubmit = async () => {
     const contentState = this.state.editorState.getCurrentContent();
     this.state.data.content = JSON.stringify(convertToRaw(contentState));
-    await saveReview(this.state.data);
 
-    this.props.showPopup('저장이 완료 되었습니다.');
+    let ret = await saveReview(this.state.data);
+
+    this.setState({
+      isShowPopup: true,
+      popupMessage: '저장되었습니다.',
+      id: ret.data._id
+    });
+
+    // 불러오기
+    //
   };
   handleOnChange = editorState => {
     this.setState({ editorState });
+  };
+
+  handlePopupCallback = () => {
+    this.setState({ isShowPopup: false });
+
+    window.location.href = '/write/' + this.state.id;
   };
 
   render() {
@@ -115,10 +143,19 @@ class Write extends Form {
               editorState={this.state.editorState}
               handleOnChange={this.handleOnChange}
             />
-            {this.renderButton('Save')}
+            <hr />
+            <div className="d-flex justify-content-end mr-3">
+              {this.renderButton('Save')}
+            </div>
           </form>
         </div>
         <div className="" style={{ height: '400px' }} />
+
+        <PopupModal
+          isShow={this.state.isShowPopup}
+          msg={this.state.popupMessage}
+          handleClose={() => this.handlePopupCallback()}
+        />
       </React.Fragment>
     );
   }

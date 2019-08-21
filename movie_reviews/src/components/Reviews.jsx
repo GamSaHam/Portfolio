@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import ReviewsTable from './ReviewsTable';
+import BestReviewsTable from './BestReviewsTable';
 
 class Reviews extends Component {
   state = {
@@ -43,6 +44,9 @@ class Reviews extends Component {
       <React.Fragment>
         <div className="container pt-5">
           <h1 className="font-kor">Top5 영화 리뷰</h1>
+          <div className="d-flex justify-content-end">
+            <button className="btn btn-outline-primary">게시판 목록</button>
+          </div>
           <div
             className="d-flex justify-content-center border-bottom"
             style={{ height: '200px' }}
@@ -84,9 +88,7 @@ class Reviews extends Component {
             <h4 className="font-kor border-bottom">베스트글</h4>
           </div>
           <div className="pt-3 border-bottom">
-            {
-              //<ReviewsTable />
-            }
+            <BestReviewsTable />
           </div>
         </div>
         <div className="" style={{ height: '400px' }} />

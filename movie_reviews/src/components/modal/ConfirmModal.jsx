@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 
 class ConfirmModal extends Component {
   render() {
-    const { isShow, onResponse } = this.props;
+    const { isShow, onResponse, message } = this.props;
 
     return (
       <Modal show={isShow} onHide={() => onResponse(0)}>
@@ -11,7 +11,7 @@ class ConfirmModal extends Component {
           className="d-flex justify-content-center"
           style={{ height: '150px' }}
         >
-          <span className="align-self-center">로그아웃을 하시겠습니까?</span>
+          <span className="align-self-center">{message}</span>
         </Modal.Body>
         <Modal.Footer>
           <button

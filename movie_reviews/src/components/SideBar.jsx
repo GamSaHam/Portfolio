@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './SideBar.scss';
-
+import { Link } from 'react-router-dom';
 class SideBar extends Component {
   state = {};
 
@@ -13,30 +13,30 @@ class SideBar extends Component {
         id="sidebar-wrapper"
       >
         <div className="sidebar-heading">
-          <a href="/" className="logo">
+          <Link className="logo" to="/">
             <h1 className=" img-logo">Movie Review</h1>
-          </a>
+          </Link>
         </div>
         <div className="list-group list-group-flush">
-          <a
-            href="/"
+          <Link
             className="border-top list-group-item list-group-item-action"
+            to="/"
           >
             <span className="font-kor">영화홈</span>
-          </a>
-          <a
-            href="/reviews"
+          </Link>
+          <Link
             className="border-top list-group-item list-group-item-action"
+            to="/reviews"
           >
             <span className="font-kor">영화리뷰</span>
-          </a>
-          <a
-            href="#"
-            className="border-top border-bottom list-group-item list-group-item-action "
+          </Link>
+
+          <Link
+            className="border-top list-group-item list-group-item-action"
             onClick={() => onCheckLogin('/write/new')}
           >
             <span className="font-kor">리뷰작성하기</span>
-          </a>
+          </Link>
           <a
             href="#"
             className="border border-left-0 border-right-0 list-group-item list-group-item-action "

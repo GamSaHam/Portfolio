@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { getRecentReviews } from '../services/reviewService';
+import { getBestReviews } from '../services/reviewService';
 import moment from 'moment';
-class ReviewsTable extends Component {
+class BestReviewsTable extends Component {
   state = {
-    column: ['번호', '영화', '제목', '작성자', '등록일'],
+    column: ['번호', '영화', '제목', '작성자', '조회수'],
     reviews: []
   };
 
-  async recentReview() {
+  async bestReview() {
     try {
-      const { data: reviews } = await getRecentReviews();
+      const { data: reviews } = await getBestReviews();
 
       this.setState({ reviews });
     } catch (ex) {
@@ -21,7 +21,7 @@ class ReviewsTable extends Component {
   }
 
   async componentDidMount() {
-    await this.recentReview();
+    await this.bestReview();
   }
 
   render() {
@@ -56,7 +56,7 @@ class ReviewsTable extends Component {
                   {currentElement.userName}
                 </td>
                 <td className="text-center" style={{ width: '10%' }}>
-                  {moment(currentElement.publishDate).format('YYYY-MM-D')}
+                  {currentElement.views}
                 </td>
               </tr>
             </React.Fragment>
@@ -67,4 +67,4 @@ class ReviewsTable extends Component {
   }
 }
 
-export default ReviewsTable;
+export default BestReviewsTable;

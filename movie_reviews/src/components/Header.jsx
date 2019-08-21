@@ -32,11 +32,7 @@ class Header extends Component {
               </button>
             </div>
           )}
-          <div className="ml-2 p-1">
-            <a href="#" className="btn">
-              <i className="fas fa-align-justify" />
-            </a>
-          </div>
+
           <div className="ml-5 p-1">
             <form className="form-inline my-2 my-lg-0">
               <input
