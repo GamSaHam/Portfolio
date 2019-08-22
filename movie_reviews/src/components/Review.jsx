@@ -93,7 +93,14 @@ class Review extends Component {
 
   render() {
     if (this.state.isFinished == false) {
-      return <h1>Waiting...</h1>;
+      return (
+        <React.Fragment>
+          <div className="container pt-5">
+            <h1 className="font-kor">영화 리뷰</h1>
+          </div>
+          <div className="" style={{ height: '400px' }} />
+        </React.Fragment>
+      );
     }
 
     return (
@@ -114,22 +121,23 @@ class Review extends Component {
 
           <hr />
           <div className="d-flex justify-content-end">
-            {this.state.review.userId === auth.getCurrentUser()._id && (
-              <div>
-                <button
-                  onClick={() => this.handleClick()}
-                  className="btn btn-primary mr-2"
-                >
-                  수정
-                </button>
-                <button
-                  onClick={() => this.handleDelete()}
-                  className="btn btn-danger mr-2"
-                >
-                  삭제
-                </button>
-              </div>
-            )}
+            {auth.getCurrentUser() &&
+              this.state.review.userId === auth.getCurrentUser()._id && (
+                <div>
+                  <button
+                    onClick={() => this.handleClick()}
+                    className="btn btn-primary mr-2"
+                  >
+                    수정
+                  </button>
+                  <button
+                    onClick={() => this.handleDelete()}
+                    className="btn btn-danger mr-2"
+                  >
+                    삭제
+                  </button>
+                </div>
+              )}
             작성자: {this.state.review.userName} <br />
             작성일:
             {moment(this.state.review.publishDate).format('YYYY-MM-D')}

@@ -37,12 +37,6 @@ class SideBar extends Component {
           >
             <span className="font-kor">리뷰작성하기</span>
           </Link>
-          <a
-            href="#"
-            className="border border-left-0 border-right-0 list-group-item list-group-item-action "
-          >
-            <span className="font-kor">영화미리보기</span>
-          </a>
         </div>
       </div>
     );

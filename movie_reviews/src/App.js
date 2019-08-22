@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import _ from 'lodash';
 
+import auth from './services/authService';
+
 import SideBar from './components/SideBar';
 import Home from './components/Home';
 import Reviews from './components/Reviews';
 import Review from './components/Review';
 import Header from './components/Header';
+import Write from './components/Write';
+import BoardReviews from './components/BoardReviews';
+
 import LoginModal from './components/modal/LoginModal';
 import RegisterModal from './components/modal/RegisterModal';
-import Write from './components/Write';
-import auth from './services/authService';
 import ConfirmModal from './components/modal/ConfirmModal';
 import PopupModal from './components/modal/PopupModal';
 
@@ -125,6 +128,7 @@ class App extends Component {
                     <Write {...props} showPopup={this.showPopup} />
                   )}
                 />
+                <Route path="/board_reviews/:page" component={BoardReviews} />
 
                 <Redirect from="/" exact to="/main" />
               </Switch>

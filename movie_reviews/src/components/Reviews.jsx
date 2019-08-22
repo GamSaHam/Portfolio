@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import Header from './Header';
 import ReviewsTable from './ReviewsTable';
 import BestReviewsTable from './BestReviewsTable';
@@ -32,20 +34,14 @@ class Reviews extends Component {
   };
 
   render() {
-    const {
-      pageSize,
-      currentPage,
-      sortColumn,
-      searchQuery,
-      reviews
-    } = this.state;
-
     return (
       <React.Fragment>
         <div className="container pt-5">
           <h1 className="font-kor">Top5 영화 리뷰</h1>
           <div className="d-flex justify-content-end">
-            <button className="btn btn-outline-primary">게시판 목록</button>
+            <Link className="btn btn-outline-primary" to="/board_reviews/new">
+              게시판 목록
+            </Link>
           </div>
           <div
             className="d-flex justify-content-center border-bottom"

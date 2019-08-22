@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+import { getBestMovies } from '../services/movieService';
 import './Slider.scss';
 /*
 <img
@@ -7,7 +9,142 @@ alt=""
 className="img-fluid"
 />*/
 class Slider extends Component {
-  state = {};
+  state = {
+    movies: []
+  };
+
+  // 영화 등록시 이름 , 이미지 경로
+  async componentDidMount() {
+    await this.mondlyBestReviews();
+  }
+
+  async mondlyBestReviews() {
+    try {
+      const { data: movies } = await getBestMovies();
+
+      console.log(movies);
+      this.setState({ movies });
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404) {
+        // this.props.history.replace('/not-found');
+      }
+    }
+  }
+
+  renderStar = total => {
+    let star = [];
+
+    for (let i = 5; i > 0; i--) {
+      let val = i - total;
+
+      if (total == 0) {
+        star.push(<i className="far fa-star text-warning" />);
+        continue;
+      }
+
+      if (val >= 1) {
+        star.push(<i className="fa fa-star text-warning" />);
+      } else if (val <= 0) {
+        star.push(<i className="far fa-star text-warning" />);
+      } else {
+        star.push(<i className="fas fa-star-half-alt text-warning" />);
+      }
+    }
+
+    return star;
+  };
+
+  renderCarouselItem = () => {
+    let card = [];
+
+    for (let i = 0; i < 5; i++) {
+      let movie = this.state.movies[i];
+
+      if (movie) {
+        if (movie.total == null) {
+          movie.total = 0;
+        } else {
+          movie.total = movie.total.toFixed(1);
+        }
+        card.push(
+          <div className="col pr-1 pl-1">
+            <div className="card bg-dark" style={{ height: '260px' }}>
+              <img
+                src={'/img/' + movie.image_path}
+                alt=""
+                className="img-fluid "
+                style={{ height: '220px' }}
+              />
+              <div className="card-body pt-1">
+                {this.renderStar(movie.total)}
+
+                <span className="ml-2 text-warning">{movie.total}/5</span>
+              </div>
+            </div>
+          </div>
+        );
+      } else {
+        card.push(
+          <div className="col pr-1 pl-1">
+            <div className="card bg-dark" style={{ height: '260px' }}>
+              <div
+                alt=""
+                className="img-fluid border-none"
+                style={{ height: '220px' }}
+              />
+              <div className="card-body pt-1" />
+            </div>
+          </div>
+        );
+      }
+    }
+
+    let card2 = [];
+
+    for (let i = 5; i < 10; i++) {
+      let movie = this.state.movies[i];
+
+      if (movie) {
+        card2.push(
+          <div className="col pr-1 pl-1">
+            <div className="card bg-dark" style={{ height: '260px' }}>
+              <img
+                src={'/img/' + movie.image_path}
+                alt=""
+                className="img-fluid"
+                style={{ height: '220px' }}
+              />
+              <div className="card-body pt-1">
+                <i className="fa fa-star text-warning" />
+                <i className="fa fa-star text-warning" />
+                <i className="fa fa-star text-warning" />
+                <i className="fa fa-star text-warning" />
+                <i className="fa fa-star text-warning" />
+                <span className="text-warning"> 10/10</span>
+              </div>
+            </div>
+          </div>
+        );
+      } else {
+        card2.push(
+          <div className="col pr-1 pl-1">
+            <div className="card bg-dark" style={{ height: '260px' }}>
+              <div alt="" className="img-fluid" style={{ height: '220px' }} />
+              <div className="card-body pt-1" />
+            </div>
+          </div>
+        );
+      }
+    }
+
+    return (
+      <React.Fragment>
+        <div className="row mr-4 ml-4">{card}</div>
+
+        <div className="row mr-4 ml-4 pt-2">{card2}</div>
+      </React.Fragment>
+    );
+  };
 
   render() {
     return (
@@ -26,28 +163,21 @@ class Slider extends Component {
                 data-slide-to="0"
                 className="btn btn-primary active mr-1"
               >
-                예매순
+                평점
               </button>
               <button
                 data-target="#carouselExampleIndicators"
                 data-slide-to="1"
                 className="btn btn-primary  mr-1"
               >
-                현재상영작
+                조회수
               </button>
               <button
                 data-target="#carouselExampleIndicators"
                 data-slide-to="2"
                 className="btn btn-primary  mr-1"
               >
-                개봉예정작
-              </button>
-              <button
-                data-target="#carouselExampleIndicators"
-                data-slide-to="3"
-                className="btn btn-primary  mr-1"
-              >
-                평점
+                현재 상영작
               </button>
             </ol>
             <div className="carousel-inner">
@@ -55,191 +185,21 @@ class Slider extends Component {
                 className="carousel-item active pl-5 pr-5"
                 style={{ width: '100%', height: '580px' }}
               >
-                <div className="row mr-4 ml-4">
-                  <div className="col pr-1 pl-1">
-                    <div className="card" style={{ height: '260px' }}>
-                      <img
-                        src="https://source.unsplash.com/random/160x220"
-                        alt=""
-                        className="img-fluid"
-                      />
-                      <div className="card-body pt-2">
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <span className=""> 10/10</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col pr-1 pl-1">
-                    <div className="card" style={{ height: '260px' }}>
-                      <img
-                        src="https://source.unsplash.com/random/161x220"
-                        alt=""
-                        className="img-fluid"
-                      />
-                      <div className="card-body pt-2">
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <span className=""> 10/10</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col pr-1 pl-1">
-                    <div className="card" style={{ height: '260px' }}>
-                      <img
-                        src="https://source.unsplash.com/random/162x220"
-                        alt=""
-                        className="img-fluid"
-                      />
-                      <div className="card-body pt-2">
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <span className=""> 10/10</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col pr-1 pl-1">
-                    <div className="card" style={{ height: '260px' }}>
-                      <img
-                        src="https://source.unsplash.com/random/163x220"
-                        alt=""
-                        className="img-fluid"
-                      />
-                      <div className="card-body pt-2">
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <span className=""> 10/10</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col pr-1 pl-1">
-                    <div className="card" style={{ height: '260px' }}>
-                      <img
-                        src="https://source.unsplash.com/random/164x220"
-                        alt=""
-                        className="img-fluid"
-                      />
-                      <div className="card-body pt-2">
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <span className=""> 10/10</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="row mr-4 ml-4 pt-2">
-                  <div className="col pr-1 pl-1">
-                    <div className="card" style={{ height: '260px' }}>
-                      <img
-                        src="https://source.unsplash.com/random/165x220"
-                        alt=""
-                        className="img-fluid"
-                      />
-                      <div className="card-body pt-2">
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <span className=""> 10/10</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col pr-1 pl-1">
-                    <div className="card" style={{ height: '260px' }}>
-                      <img
-                        src="https://source.unsplash.com/random/166x220"
-                        alt=""
-                        className="img-fluid"
-                      />
-                      <div className="card-body pt-2">
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <span className=""> 10/10</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col pr-1 pl-1">
-                    <div className="card" style={{ height: '260px' }}>
-                      <img
-                        src="https://source.unsplash.com/random/167x220"
-                        alt=""
-                        className="img-fluid"
-                      />
-                      <div className="card-body pt-2">
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <span className=""> 10/10</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col pr-1 pl-1">
-                    <div className="card" style={{ height: '260px' }}>
-                      <img
-                        src="https://source.unsplash.com/random/168x220"
-                        alt=""
-                        className="img-fluid"
-                      />
-                      <div className="card-body pt-2">
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <span className=""> 10/10</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col pr-1 pl-1">
-                    <div className="card" style={{ height: '260px' }}>
-                      <img
-                        src="https://source.unsplash.com/random/169x220"
-                        alt=""
-                        className="img-fluid"
-                      />
-                      <div className="card-body pt-2">
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <span className=""> 10/10</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {this.renderCarouselItem()}
               </div>
 
               <div
                 className="carousel-item"
                 style={{ width: '100%', height: '400px' }}
-              />
+              >
+                Item2
+              </div>
               <div
                 className="carousel-item"
                 style={{ width: '100%', height: '400px' }}
-              />
+              >
+                Item3
+              </div>
             </div>
 
             <a
