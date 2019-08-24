@@ -6,12 +6,15 @@ class BoardReviews extends Component {
     return (
       <React.Fragment>
         <div className="container pt-5">
-          <h1 className="font-kor">게시판</h1>
+          <h1>게시판</h1>
           <hr />
 
-          <BoardReviewsTable page={this.props.match.params.page} />
+          <BoardReviewsTable
+            page={this.props.match.params.page}
+            search={this.props.match.params.search}
+          />
         </div>
-        <div className="" style={{ height: '400px' }} />
+        <div className="" style={{ height: '500px' }} />
       </React.Fragment>
     );
   }

@@ -7,8 +7,7 @@ import auth from '../services/authService';
 import Form from '../components/common/form';
 import RichEditor from './common/RichEditor';
 import PopupModal from './modal/PopupModal';
-
-import history from 'history';
+import CustomImageEditor from './CustomImageEditor';
 
 class Write extends Form {
   state = {
@@ -139,10 +138,8 @@ class Write extends Form {
             {this.renderInput('title', 'Title')}
             {this.renderInput('rating', 'Rating')}
 
-            <RichEditor
-              editorState={this.state.editorState}
-              handleOnChange={this.handleOnChange}
-            />
+            <CustomImageEditor />
+
             <hr />
             <div className="d-flex justify-content-end mr-3">
               {this.renderButton('Save')}

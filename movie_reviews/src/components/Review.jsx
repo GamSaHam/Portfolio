@@ -96,9 +96,9 @@ class Review extends Component {
       return (
         <React.Fragment>
           <div className="container pt-5">
-            <h1 className="font-kor">영화 리뷰</h1>
+            <h1>영화 리뷰</h1>
           </div>
-          <div className="" style={{ height: '400px' }} />
+          <div className="" style={{ height: '660px' }} />
         </React.Fragment>
       );
     }
@@ -106,7 +106,7 @@ class Review extends Component {
     return (
       <React.Fragment>
         <div className="container pt-5">
-          <h1 className="font-kor">영화 리뷰</h1>
+          <h1>영화 리뷰</h1>
 
           <div className="d-flex justify-content-end">
             조회수: {this.state.review.views}

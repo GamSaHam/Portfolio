@@ -17,6 +17,8 @@ import RegisterModal from './components/modal/RegisterModal';
 import ConfirmModal from './components/modal/ConfirmModal';
 import PopupModal from './components/modal/PopupModal';
 
+import CustomImageEditor from './components/CustomImageEditor';
+
 import history from './history';
 
 import './App.scss';
@@ -128,7 +130,10 @@ class App extends Component {
                     <Write {...props} showPopup={this.showPopup} />
                   )}
                 />
-                <Route path="/board_reviews/:page" component={BoardReviews} />
+                <Route
+                  path="/board_reviews/:page?/:search?"
+                  component={BoardReviews}
+                />
 
                 <Redirect from="/" exact to="/main" />
               </Switch>

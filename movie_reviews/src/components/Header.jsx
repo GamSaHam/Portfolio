@@ -36,13 +36,13 @@ class Header extends Component {
           <div className="ml-5 p-1">
             <form className="form-inline my-2 my-lg-0">
               <input
-                className="form-control mr-sm-2 font-kor"
+                className="form-control mr-sm-2"
                 type="search"
-                placeholder="검색"
-                aria-label="검색"
+                placeholder="통합검색"
+                aria-label="통합검색"
               />
               <button
-                className="btn btn-outline-primary my-2 my-sm-0 font-kor"
+                className="btn btn-outline-primary my-2 my-sm-0 "
                 type="submit"
               >
                 검색

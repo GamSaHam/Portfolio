@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import Slider from './Slider';
-import TopMovie from './TopMovie';
+import RatingAndReviewsMovie from './RatingAndReviewsMovie';
 /*
 <button
           onClick={() => {
@@ -15,7 +15,7 @@ class Home extends Component {
     return (
       <React.Fragment>
         <Slider />
-        <TopMovie />
+        <RatingAndReviewsMovie />
         <div className="" style={{ height: '400px' }} />
       </React.Fragment>
     );

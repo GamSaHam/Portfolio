@@ -33,58 +33,63 @@ class Reviews extends Component {
     this.setState({ sortColumn });
   };
 
+  renderTop5Movie = () => {
+    return (
+      <div
+        className="d-flex justify-content-center border-bottom"
+        style={{ height: '200px' }}
+      >
+        <div
+          className="ml-2 bg-secondary align-self-center"
+          style={{ height: '160px', width: '140px' }}
+        />
+
+        <div
+          className="ml-2 bg-secondary align-self-center"
+          style={{ height: '160px', width: '140px' }}
+        />
+
+        <div
+          className="ml-2 bg-secondary align-self-center"
+          style={{ height: '160px', width: '140px' }}
+        />
+
+        <div
+          className="ml-2 bg-secondary align-self-center"
+          style={{ height: '160px', width: '140px' }}
+        />
+
+        <div
+          className="ml-2 bg-secondary align-self-center"
+          style={{ height: '160px', width: '140px' }}
+        />
+      </div>
+    );
+  };
+
   render() {
     return (
       <React.Fragment>
         <div className="container pt-5">
-          <h1 className="font-kor">Top5 영화 리뷰</h1>
+          <h1>Top5 영화 리뷰</h1>
           <div className="d-flex justify-content-end">
             <Link className="btn btn-outline-primary" to="/board_reviews/new">
               게시판 목록
             </Link>
           </div>
-          <div
-            className="d-flex justify-content-center border-bottom"
-            style={{ height: '200px' }}
-          >
-            <div
-              className="ml-2 bg-secondary align-self-center"
-              style={{ height: '160px', width: '140px' }}
-            />
-
-            <div
-              className="ml-2 bg-secondary align-self-center"
-              style={{ height: '160px', width: '140px' }}
-            />
-
-            <div
-              className="ml-2 bg-secondary align-self-center"
-              style={{ height: '160px', width: '140px' }}
-            />
-
-            <div
-              className="ml-2 bg-secondary align-self-center"
-              style={{ height: '160px', width: '140px' }}
-            />
-
-            <div
-              className="ml-2 bg-secondary align-self-center"
-              style={{ height: '160px', width: '140px' }}
-            />
-          </div>
 
           <div className="d-flex justify-content-end  mt-5">
-            <h4 className="font-kor border-bottom">최신리뷰</h4>
-          </div>
-          <div className="pt-3 border-bottom">
-            <ReviewsTable />
-          </div>
-
-          <div className="d-flex justify-content-end  mt-5">
-            <h4 className="font-kor border-bottom">베스트글</h4>
+            <h4 className="border-bottom">베스트글</h4>
           </div>
           <div className="pt-3 border-bottom">
             <BestReviewsTable />
+          </div>
+
+          <div className="d-flex justify-content-end  mt-5">
+            <h4 className="border-bottom">최신리뷰</h4>
+          </div>
+          <div className="pt-3 border-bottom">
+            <ReviewsTable />
           </div>
         </div>
         <div className="" style={{ height: '400px' }} />

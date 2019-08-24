@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { getBestReviews } from '../services/reviewService';
 import moment from 'moment';
 class BestReviewsTable extends Component {
@@ -28,7 +29,7 @@ class BestReviewsTable extends Component {
     return (
       <table className="table">
         <thead>
-          <tr className="font-kor">
+          <tr>
             {this.state.column.map(value => (
               <th scope="col" className="text-center">
                 {value}
@@ -48,9 +49,9 @@ class BestReviewsTable extends Component {
                   {currentElement.movie.name}
                 </td>
                 <td className="text-center" style={{ width: '60%' }}>
-                  <a href={'/review/' + currentElement._id}>
+                  <Link to={'/review/' + currentElement._id}>
                     {currentElement.title}
-                  </a>
+                  </Link>
                 </td>
                 <td className="text-center" style={{ width: '10%' }}>
                   {currentElement.userName}

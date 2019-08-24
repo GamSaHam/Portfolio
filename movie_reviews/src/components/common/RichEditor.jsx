@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Editor,
-  EditorState,
-  RichUtils,
-  getDefaultKeyBinding,
-  convertFromRaw,
-  convertToRaw
-} from 'draft-js';
+import { Editor, RichUtils, getDefaultKeyBinding } from 'draft-js';
 
 import './RichEditor.scss';
 
@@ -93,7 +86,6 @@ class RichEditor extends React.Component {
         />
         <div className={className} onClick={this.focus}>
           <Editor
-            className="font-kor"
             blockStyleFn={getBlockStyle}
             customStyleMap={styleMap}
             editorState={editorState}

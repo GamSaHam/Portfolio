@@ -1,29 +1,35 @@
 import React, { Component } from 'react';
 
-import { getBestMovies } from '../services/movieService';
+import history from '../history';
+
+import {
+  getBestMovies,
+  getBestViewsMovies,
+  getBestRecentMovies
+} from '../services/movieService';
+
+import Star from './common/Star';
 import './Slider.scss';
-/*
-<img
-src="https://source.unsplash.com/random/564x564"
-alt=""
-className="img-fluid"
-/>*/
+
 class Slider extends Component {
   state = {
-    movies: []
+    bestRatingMovies: [],
+    bestViewsMovies: [],
+    bestRecentMovies: []
   };
 
   // 영화 등록시 이름 , 이미지 경로
   async componentDidMount() {
-    await this.mondlyBestReviews();
+    await this.mondlyBestMovies();
+    await this.mondlyBestViewsMovie();
+    await this.mondlyBestRecentMovie();
   }
 
-  async mondlyBestReviews() {
+  async mondlyBestMovies() {
     try {
-      const { data: movies } = await getBestMovies();
+      const { data: bestRatingMovies } = await getBestMovies();
 
-      console.log(movies);
-      this.setState({ movies });
+      this.setState({ bestRatingMovies });
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         // this.props.history.replace('/not-found');
@@ -31,110 +37,88 @@ class Slider extends Component {
     }
   }
 
-  renderStar = total => {
-    let star = [];
+  async mondlyBestViewsMovie() {
+    try {
+      const { data: bestViewsMovies } = await getBestViewsMovies();
 
-    for (let i = 5; i > 0; i--) {
-      let val = i - total;
-
-      if (total == 0) {
-        star.push(<i className="far fa-star text-warning" />);
-        continue;
-      }
-
-      if (val >= 1) {
-        star.push(<i className="fa fa-star text-warning" />);
-      } else if (val <= 0) {
-        star.push(<i className="far fa-star text-warning" />);
-      } else {
-        star.push(<i className="fas fa-star-half-alt text-warning" />);
+      this.setState({ bestViewsMovies });
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404) {
+        // this.props.history.replace('/not-found');
       }
     }
+  }
 
-    return star;
+  async mondlyBestRecentMovie() {
+    try {
+      const { data: bestRecentMovies } = await getBestRecentMovies();
+
+      this.setState({ bestRecentMovies });
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404) {
+        // this.props.history.replace('/not-found');
+      }
+    }
+  }
+
+  handleImageClick = movie => {
+    history.push('/board_reviews/new/' + movie.name);
   };
 
-  renderCarouselItem = () => {
-    let card = [];
+  renderMovieCard = movie => {
+    if (movie) {
+      return (
+        <div className="col pr-1 pl-1">
+          <div className="card bg-dark" style={{ height: '260px' }}>
+            <img
+              src={'/img/' + movie.image_path}
+              alt=""
+              className={movie ? 'img-fluid clickable' : 'img-fluid bg-dark'}
+              style={{ height: '220px' }}
+              onClick={() => {
+                this.handleImageClick(movie);
+              }}
+            />
+            <div className="card-body pt-1">
+              <div className="row">
+                <Star
+                  rating={movie.total === null ? 0 : movie.total.toFixed(1)}
+                />
 
-    for (let i = 0; i < 5; i++) {
-      let movie = this.state.movies[i];
-
-      if (movie) {
-        if (movie.total == null) {
-          movie.total = 0;
-        } else {
-          movie.total = movie.total.toFixed(1);
-        }
-        card.push(
-          <div className="col pr-1 pl-1">
-            <div className="card bg-dark" style={{ height: '260px' }}>
-              <img
-                src={'/img/' + movie.image_path}
-                alt=""
-                className="img-fluid "
-                style={{ height: '220px' }}
-              />
-              <div className="card-body pt-1">
-                {this.renderStar(movie.total)}
-
-                <span className="ml-2 text-warning">{movie.total}/5</span>
+                <span className="ml-1 text-warning">
+                  {movie.total === null ? '0.0' : movie.total.toFixed(1)}/5.0
+                </span>
               </div>
             </div>
           </div>
-        );
-      } else {
-        card.push(
-          <div className="col pr-1 pl-1">
-            <div className="card bg-dark" style={{ height: '260px' }}>
-              <div
-                alt=""
-                className="img-fluid border-none"
-                style={{ height: '220px' }}
-              />
-              <div className="card-body pt-1" />
-            </div>
-          </div>
-        );
-      }
+        </div>
+      );
+    }
+
+    return (
+      <div className="col pr-1 pl-1">
+        <div className="card bg-dark" style={{ height: '260px' }}>
+          <div className={'bg-dark'} style={{ height: '220px' }} />
+        </div>
+      </div>
+    );
+  };
+
+  renderCarouselItem = movies => {
+    let card = [];
+
+    for (let i = 0; i < 5; i++) {
+      let movie = movies[i];
+
+      card.push(this.renderMovieCard(movie));
     }
 
     let card2 = [];
 
     for (let i = 5; i < 10; i++) {
-      let movie = this.state.movies[i];
+      let movie = movies[i];
 
-      if (movie) {
-        card2.push(
-          <div className="col pr-1 pl-1">
-            <div className="card bg-dark" style={{ height: '260px' }}>
-              <img
-                src={'/img/' + movie.image_path}
-                alt=""
-                className="img-fluid"
-                style={{ height: '220px' }}
-              />
-              <div className="card-body pt-1">
-                <i className="fa fa-star text-warning" />
-                <i className="fa fa-star text-warning" />
-                <i className="fa fa-star text-warning" />
-                <i className="fa fa-star text-warning" />
-                <i className="fa fa-star text-warning" />
-                <span className="text-warning"> 10/10</span>
-              </div>
-            </div>
-          </div>
-        );
-      } else {
-        card2.push(
-          <div className="col pr-1 pl-1">
-            <div className="card bg-dark" style={{ height: '260px' }}>
-              <div alt="" className="img-fluid" style={{ height: '220px' }} />
-              <div className="card-body pt-1" />
-            </div>
-          </div>
-        );
-      }
+      card2.push(this.renderMovieCard(movie));
     }
 
     return (
@@ -149,7 +133,8 @@ class Slider extends Component {
   render() {
     return (
       <div className="container pt-5 pb-5  ">
-        <h1 className="font-kor">이달의 영화랭킹</h1>
+        <h1>이달의 영화랭킹</h1>
+        <hr />
         <div className="pt-5 pb-5 slider-bg">
           <div
             id="carouselExampleIndicators"
@@ -177,7 +162,7 @@ class Slider extends Component {
                 data-slide-to="2"
                 className="btn btn-primary  mr-1"
               >
-                현재 상영작
+                최신순
               </button>
             </ol>
             <div className="carousel-inner">
@@ -185,20 +170,20 @@ class Slider extends Component {
                 className="carousel-item active pl-5 pr-5"
                 style={{ width: '100%', height: '580px' }}
               >
-                {this.renderCarouselItem()}
+                {this.renderCarouselItem(this.state.bestRatingMovies)}
               </div>
 
               <div
                 className="carousel-item"
-                style={{ width: '100%', height: '400px' }}
+                style={{ width: '100%', height: '580px' }}
               >
-                Item2
+                {this.renderCarouselItem(this.state.bestViewsMovies)}
               </div>
               <div
                 className="carousel-item"
-                style={{ width: '100%', height: '400px' }}
+                style={{ width: '100%', height: '580px' }}
               >
-                Item3
+                {this.renderCarouselItem(this.state.bestRecentMovies)}
               </div>
             </div>
 

@@ -12,9 +12,14 @@ class Pagination extends Component {
     for (let i = 0; i < contentSize / pageSize; i++) {
       li.push(
         <li className={i + 1 == page ? 'page-item active' : 'page-item'}>
-          <a href={'/board_reviews/' + (i + 1)} className="page-link">
+          <button
+            onClick={() => {
+              this.props.onClick(i + 1);
+            }}
+            className="page-link"
+          >
             {i + 1}
-          </a>
+          </button>
         </li>
       );
     }

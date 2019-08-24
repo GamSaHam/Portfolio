@@ -22,20 +22,20 @@ class SideBar extends Component {
             className="border-top list-group-item list-group-item-action"
             to="/"
           >
-            <span className="font-kor">영화홈</span>
+            <span>영화홈</span>
           </Link>
           <Link
             className="border-top list-group-item list-group-item-action"
             to="/reviews"
           >
-            <span className="font-kor">영화리뷰</span>
+            <span>영화리뷰</span>
           </Link>
 
           <Link
             className="border-top list-group-item list-group-item-action"
             onClick={() => onCheckLogin('/write/new')}
           >
-            <span className="font-kor">리뷰작성하기</span>
+            <span>리뷰작성하기</span>
           </Link>
         </div>
       </div>
