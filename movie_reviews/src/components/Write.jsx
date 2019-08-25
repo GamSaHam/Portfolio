@@ -138,7 +138,10 @@ class Write extends Form {
             {this.renderInput('title', 'Title')}
             {this.renderInput('rating', 'Rating')}
 
-            <CustomImageEditor />
+            <CustomImageEditor
+              editorState={this.state.editorState}
+              handleOnChange={this.handleOnChange}
+            />
 
             <hr />
             <div className="d-flex justify-content-end mr-3">

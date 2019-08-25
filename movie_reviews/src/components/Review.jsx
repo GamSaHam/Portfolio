@@ -11,6 +11,8 @@ import ConfirmModal from './modal/ConfirmModal';
 import PopupModal from './modal/PopupModal';
 import history from '../history';
 
+import ReadImageEditor from './ReadImageEditor';
+
 class Review extends Component {
   state = {
     review: [],
@@ -115,7 +117,10 @@ class Review extends Component {
           <hr />
           <div className="container">
             <div className="App">
-              <Editor editorState={this.state.editorState} readOnly={true} />
+              <ReadImageEditor
+                editorState={this.state.editorState}
+                readOnly={true}
+              />
             </div>
           </div>
 
