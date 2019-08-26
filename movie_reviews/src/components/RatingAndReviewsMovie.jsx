@@ -69,7 +69,7 @@ class RatingAndReviewsMovie extends Component {
           <div className="col-4 d-flex flex-column bd-highlight mb-3">
             <h2>스포트 라이트</h2>
             <img
-              src={'/img/spotlight.png'}
+              src={'/img/popcorn.jpg'}
               alt=""
               className="img-fluid clickable"
             />

@@ -58,7 +58,8 @@ class LoginModal extends Form {
               {this.renderInput('password', '비밀번호', 'password')}
               <p>
                 회원이 아니세요?{' '}
-                <button
+                <a
+                  href="#"
                   className="btn btn-light"
                   onClick={() => {
                     onShowModal(false);
@@ -66,7 +67,7 @@ class LoginModal extends Form {
                   }}
                 >
                   회원가입
-                </button>
+                </a>
               </p>
             </Modal.Body>
 

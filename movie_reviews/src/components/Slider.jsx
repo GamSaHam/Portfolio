@@ -69,12 +69,12 @@ class Slider extends Component {
     if (movie) {
       return (
         <div className="col pr-1 pl-1">
-          <div className="card bg-dark" style={{ height: '260px' }}>
+          <div className="card bg-dark" style={{ height: '300px' }}>
             <img
               src={'/img/' + movie.image_path}
               alt=""
               className={movie ? 'img-fluid clickable' : 'img-fluid bg-dark'}
-              style={{ height: '220px' }}
+              style={{ height: '270px' }}
               onClick={() => {
                 this.handleImageClick(movie);
               }}
@@ -97,8 +97,8 @@ class Slider extends Component {
 
     return (
       <div className="col pr-1 pl-1">
-        <div className="card bg-dark" style={{ height: '260px' }}>
-          <div className={'bg-dark'} style={{ height: '220px' }} />
+        <div className="card bg-dark" style={{ height: '300px' }}>
+          <div className={'bg-dark'} style={{ height: '270px' }} />
         </div>
       </div>
     );
@@ -125,7 +125,7 @@ class Slider extends Component {
       <React.Fragment>
         <div className="row mr-4 ml-4">{card}</div>
 
-        <div className="row mr-4 ml-4 pt-2">{card2}</div>
+        <div className="row mr-4 ml-4 pt-4">{card2}</div>
       </React.Fragment>
     );
   };
@@ -168,20 +168,20 @@ class Slider extends Component {
             <div className="carousel-inner">
               <div
                 className="carousel-item active pl-5 pr-5"
-                style={{ width: '100%', height: '580px' }}
+                style={{ width: '100%', height: '670px' }}
               >
                 {this.renderCarouselItem(this.state.bestRatingMovies)}
               </div>
 
               <div
-                className="carousel-item"
-                style={{ width: '100%', height: '580px' }}
+                className="carousel-item pl-5 pr-5"
+                style={{ width: '100%', height: '670px' }}
               >
                 {this.renderCarouselItem(this.state.bestViewsMovies)}
               </div>
               <div
-                className="carousel-item"
-                style={{ width: '100%', height: '580px' }}
+                className="carousel-item pl-5 pr-5"
+                style={{ width: '100%', height: '670px' }}
               >
                 {this.renderCarouselItem(this.state.bestRecentMovies)}
               </div>
